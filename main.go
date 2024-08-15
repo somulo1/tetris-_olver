@@ -3,33 +3,33 @@ package main
 import (
 	"fmt"
 	"os"
-	"strings"
-	"tetris-optimizer/helperfunction"
-)	
+
+	"Tetris-optimizer/helperfunctions"
+)
 
 func main() {
-	if len(os.Args) < 2 {
-		fmt.Println("Usage: go run . <file-path>")
+	// Limit CLI arguments to 1 (assuming the file path is the only argument)
+	if len(os.Args) != 2 {
+		fmt.Println("Usage: go run . <something.txt>")
 		return
 	}
-
 	filePath := os.Args[1]
 
 	// 1. Check if file is empty
-	if err := helperfunction.CheckIfFileIsEmpty(filePath); err != nil {
+	if err := helperfunctions.CheckIfFileIsEmpty(filePath); err != nil {
 		fmt.Println(err)
 		return
 	}
 
 	// 2. Read file content
-	content, err := helperfunction.ReadFile(filePath)
+	content, err := helperfunctions.ReadFile(filePath)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
 	// 3. Parse tetrominoes
-	tetrominoes, err := helperfunction.ParseTetrominoes(content)
+	tetrominoes, err := helperfunctions.CheckTetris(content)
 	if err != nil {
 		fmt.Println("Error parsing tetrominoes")
 		return
@@ -37,22 +37,20 @@ func main() {
 
 	// 4. Validate tetromino format
 	for _, tetromino := range tetrominoes {
-		if !helperfunction.ValidateTetrominoFormat(tetromino) {
-			fmt.Println("ERROR")
+		if !helperfunctions.ValidateTetrominoFormat(tetromino) {
+			fmt.Println("ERROR: Invalid tetromino format")
 			return
 		}
 	}
 
-	// 5. Calculate grid size
-	totalArea := 0
+	// Example board dimensions
+	boardWidth := 10
+	boardHeight := 10
+
+	// 5. Execute board operations for each tetromino and print results
 	for _, tetromino := range tetrominoes {
-		totalArea += strings.Count(tetromino, "#")
+		// Call ExecuteBoardOperations with example coordinates (0, 0) and print the result
+		boardRepresentation := helperfunctions.ExecuteBoardOperations(boardWidth, boardHeight, *tetrominoes, 0, 0)
+		fmt.Println(boardRepresentation)
 	}
-	gridSize := helperfunction.CalculateSquareSize(totalArea)
-
-	// 6. Place tetrominoes into the grid
-	grid := helperfunction.PlaceTetrominoes(tetrominoes, gridSize)
-
-	// 7. Print the result
-	helperfunction.PrintGrid(grid)
 }
