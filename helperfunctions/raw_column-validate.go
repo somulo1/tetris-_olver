@@ -1,9 +1,11 @@
+//the tetrominos should have a total of four row and four columns
+// the number of "#" in each cube must be equal to 4
 package helperfunctions
 
 import (
 	"strings"
 )
-
+//validate the tetromin arrangement
 func ValidateTetrominoFormat(filename string) bool {
 	lines := strings.Split(strings.TrimSpace(filename), "\n")
 	if len(lines) != 4 {
