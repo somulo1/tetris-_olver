@@ -15,7 +15,7 @@ func main() {
 	}
 	filePath := os.Args[1]
 
-	//limit file type to a text file
+	// limit file type to a text file
 	if !helperfunctions.Check_extension(filePath) {
 		fmt.Println("Only provide a .txt file")
 		return
@@ -34,18 +34,16 @@ func main() {
 	}
 
 	//  Parse tetrominoes
-	tetrominoes := helperfunctions.CheckTetris(content)
-
+	tetrominoes := helperfunctions.ValidateTetrominoFormat(content)
+	fmt.Println(tetrominoes)
 	// Validate tetromino format
 	for _, tetromino := range tetrominoes {
-		if !helperfunctions.ValidateTetrominoFormat(tetromino) {
+		if !helperfunctions.CheckTetri(tetromino) {
 			fmt.Println("ERROR1")
 			return
 		}
-		
+		helperfunctions.CheckTetris
 	}
 	// trim the tetromino
-	// placing the tetris 
-
-
+	// placing the tetris
 }
