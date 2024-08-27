@@ -1,7 +1,7 @@
 package validity
 
 //check if it has four hashes
-func fourHashes(tetro []string) bool {
+func FourHashes(tetro []string) bool {
 	var count int
 	row := len(tetro)
 	col := len(tetro[0])
@@ -21,7 +21,7 @@ func fourHashes(tetro []string) bool {
 }
 
 // check for the valid tetromino representations in ech of the four chuncks
-func validConnections(tet []string) bool {
+func ValidConnections(tet []string) bool {
 	var count int
 	tag := byte('#')
 	row, col := len(tet), len(tet[0])
@@ -54,7 +54,7 @@ func validConnections(tet []string) bool {
 }
 
  //check the tetromino representations
- func fourByFour(tetro []string) bool {
+ func FourByFour(tetro []string) bool {
 	valid := true
 
 	// Determine if tetromino is stacked four lines high
