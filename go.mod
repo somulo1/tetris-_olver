@@ -1,3 +1,3 @@
-module Tetris-optimizer
+module tetris-optimizer
 
-go 1.23.0
+go 1.23.1
