@@ -10,7 +10,7 @@ This project aims to solve Tetris puzzles by finding the optimal arrangement of 
 ## Usage
 1. Run the following command to start the application:
     ```bash
-    go run main.go path/to/tetromino_file.txt
+    go run main.go tetromino_file.txtg
     ```
 2. Example of a text File: sample.txt
 
