@@ -3,47 +3,40 @@ package main
 import (
 	"fmt"
 	"os"
+	"time"
 
-	"Tetris-optimizer/helperfunctions"
+	"tetris-optimizer/helperfunctions"
 )
 
 func main() {
-	// Limit CLI arguments to 2  argument
+	start := time.Now()
 	if len(os.Args) != 2 {
-		fmt.Println("Usage: go run . <something.txt>")
+		fmt.Println("error: please provide the path to the tetromino file")
 		return
 	}
-	filePath := os.Args[1]
-
-	// limit file type to a text file
-	if !helperfunctions.Check_extension(filePath) {
-		fmt.Println("Only provide a .txt file")
-		return
-	}
-	//  Check if file is empty
-	if err := helperfunctions.CheckIfFileIsEmpty(filePath); err != nil {
-		fmt.Println("ERROR")
-		return
-	}
-
-	//  Read file content
-	content, err := helperfunctions.ReadFile(filePath)
+	fileName := os.Args[1]
+	tet, err := helperfunctions.InputFileReader(fileName)
 	if err != nil {
-		fmt.Println("ERROR")
+		fmt.Println(err.Error())
 		return
 	}
-
-	//  Parse tetrominoes
-	tetrominoes := helperfunctions.ValidateTetrominoFormat(content)
-	fmt.Println(tetrominoes)
-	// Validate tetromino format
-	for _, tetromino := range tetrominoes {
-		if !helperfunctions.CheckTetri(tetromino) {
-			fmt.Println("ERROR1")
-			return
-		}
-		helperfunctions.CheckTetris
+	Trimtetros, err := helperfunctions.TrimTetrominos(tet)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
 	}
-	// trim the tetromino
-	// placing the tetris
+	solvedTetrominos, err := helperfunctions.SolveTetris(Trimtetros)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	for _, t := range solvedTetrominos.Tet {
+		for _, s := range t {
+			fmt.Printf("%s", s)
+		}
+		fmt.Println()
+	}
+	elapsed := time.Since(start)
+	fmt.Println()
+	fmt.Printf("Elapsed time: %s\n", elapsed)
 }
