@@ -91,6 +91,9 @@ func removeEmptyColumns(tetromino []string) []string {
 
 // Validates if a tetromino is a 4x4 grid with exactly 4 blocks connected
 func isValidTetromino(tetromino []string) bool {
+	if len(tetromino) == 0 {
+		return false
+	}
 	if len(tetromino) != 4 || len(tetromino[0]) != 4 {
 		return false
 	}
@@ -116,9 +119,9 @@ func countConnections(tetromino []string, x, y int) int {
 	if y > 0 && tetromino[y-1][x] != '.' {
 		connections++
 	}
-	if y < len(tetromino)-1 && tetromino[y+1][x] != '.' {
-		connections++
-	}
+	// if y < len(tetromino)-1 && tetromino[y+1][x] != '.' {
+	// 	connections++
+	// }
 	if x > 0 && tetromino[y][x-1] != '.' {
 		connections++
 	}
