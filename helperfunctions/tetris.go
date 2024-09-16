@@ -10,7 +10,7 @@ type Tetrominos struct {
 }
 
 // Estimates the initial grid size for the tetrominoes
-func calculateInitialGridSize(tet *Tetrominos) (int, int) {
+func calculateInitialGridSize(tet *Tetrominos) (int, int) {//square grid
 	var maxWidth, maxHeight int
 	for _, tetromino := range tet.Tet {
 		width := len(tetromino[0])
@@ -33,7 +33,7 @@ func createGrid(width, height int) [][]string {
 		grid[i] = make([]string, width)
 		for j := range grid[i] {
 			grid[i][j] = "."
-		}
+		} 
 	}
 	return grid
 }
