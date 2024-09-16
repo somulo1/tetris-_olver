@@ -119,9 +119,9 @@ func countConnections(tetromino []string, x, y int) int {
 	if y > 0 && tetromino[y-1][x] != '.' {
 		connections++
 	}
-	// if y < len(tetromino)-1 && tetromino[y+1][x] != '.' {
-	// 	connections++
-	// }
+	if y < len(tetromino)-1 && tetromino[y+1][x] != '.' {
+		connections++
+	}
 	if x > 0 && tetromino[y][x-1] != '.' {
 		connections++
 	}
